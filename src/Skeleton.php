@@ -1,6 +1,5 @@
 <?php
 namespace DenDev\Plpskeleton;
-require '../vendor/autoload.php';
 use DenDev\Plpadaptability\Adaptability;
 use DenDev\Plpskeleton\SkeletonInterface;
 
@@ -15,9 +14,14 @@ class Skeleton extends Adaptability implements SkeletonInterface
     protected function _set_default_config()
     {
         $root_path = str_replace( 'src', '', dirname( __FILE__ ) );
-        $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
-        $tmp = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $root_url = substr( $tmp, 0, strpos($tmp, 'src/' ) );
+
+        $root_url = '';
+        if( ! empty( $_SERVER['HTTPS'] ) && ! empty( $_SERVER['HTTP_HOST'] ) && ! empty( $_SERVER['REQUEST_URI'] ) )
+        {
+            $protocol = ( $_SERVER['HTTPS'] && $_SERVER['HTTPS'] !== 'off' ) ? 'https://' : 'http://';
+            $tmp = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $root_url = substr( $tmp, 0, strpos($tmp, 'src/' ) );
+        }
         return array( 
             'root_path' => $root_path,
             'log_path' => $root_path . 'logs/',
@@ -27,6 +31,6 @@ class Skeleton extends Adaptability implements SkeletonInterface
             'js_url' => $root_url . 'assets/js/',
             'img_path' => $root_path . 'assets/img/',
             'css_path' => $root_path . 'assets/css/',
-         );
+        );
     }
 }
