@@ -3,6 +3,7 @@
     "description": "skeleton for pulpy project",
     "type": "libs",
     "require": {
+        "dendev/plpadaptability": "dev-master"
     },
     "require-dev": {
     },
