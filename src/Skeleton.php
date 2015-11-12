@@ -30,8 +30,3 @@ class Skeleton extends Adaptability implements SkeletonInterface
          );
     }
 }
-
-//print_r( $_SERVER );
-$object = new Skeleton();
-//print_r( $object->get_config_value( 'js_path' ) );
-print_r( $object->get_config_value( 'js_url' ) );
