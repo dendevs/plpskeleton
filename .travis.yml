@@ -17,11 +17,14 @@ before_script:
   - mkdir -p build/logs
   - mkdir -p build/docs
   - chmod u+x .travis_shell_after_success.sh
+  - pear channel-discover pear.phpdoc.org 
+  - pear install phpdoc/phpDocumentor 
 
 script:
   - phpunit
   - phpunit --coverage-clover build/logs/clover.xml
-  - vendor/bin/phpdoc.php -d ./src -t ./build/docs
+phpdoc run -d src/ -t docs/
+  - phpdoc -d ./src -t ./build/docs
 
 after_script:
   - php vendor/bin/coveralls -v

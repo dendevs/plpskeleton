@@ -3,3 +3,4 @@ clover.xml
 /vendor/
 composer.lock
 /logs/
+/docs/
