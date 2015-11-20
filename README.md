@@ -1,5 +1,5 @@
-# PlpSkeleton
+# PlpAdaptability
 
-skeleton for puplpy modules project
+For service in single or kernel usage
 
-[![Build Status](https://travis-ci.org/dendevs/plpkernel.svg)](https://travis-ci.org/dendevs/plpkernel)
+[![Build Status](https://travis-ci.org/dendevs/plpadaptability.svg)](https://travis-ci.org/dendevs/plpadaptability)
