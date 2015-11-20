@@ -1,9 +1,8 @@
 {
-    "name": "dendev/plpskeleton",
-    "description": "skeleton for pulpy project",
+    "name": "dendev/plpadaptability",
+    "description": "adaptability for pulpy project",
     "type": "libs",
     "require": {
-        "dendev/plpadaptability": "dev-master"
     },
     "require-dev": {
     },
@@ -16,7 +15,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "DenDev\\Plpskeleton\\": "src"
+            "DenDev\\Plpadaptability\\": "src"
         }
     }
 }
