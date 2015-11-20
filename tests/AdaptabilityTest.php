@@ -29,6 +29,28 @@ class AdaptabilityTest extends \PHPUnit_Framework_TestCase
 		$object = new ChildAdaptability();
 		$this->assertEquals( 'defaut value 1', $object->get_config_value( 'test1' ) );
 	}
+
+	public function test_log()
+	{
+		$object = new ChildAdaptability();
+		$this->assertTrue( $object->log( 'service_test', 'fichier', 'debug', 'message debug texte' ) );
+		$this->assertTrue( $object->log( 'service_test', 'fichier', 'error', 'message error texte' ) );
+	}
+
+	public function test_error()
+	{
+		$object = new ChildAdaptability();
+		$this->assertTrue( $object->error( 'service_test', 'messsage erreur', 100 ) );
+	}
+
+	/**
+	 * @expectedException Exception
+	 */
+	public function test_exception_error()
+	{
+		$object = new ChildAdaptability();
+		$this->assertTrue( $object->error( 'service_test', 'message erreur fatal', 200, array( 'info' => 'info context' ), true ) );
+	}
 }
 
 class ChildAdaptability extends Adaptability

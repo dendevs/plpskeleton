@@ -32,6 +32,24 @@ abstract class Adaptability implements AdaptabilityInterface
     }
 
     /**
+     * Recolte l'inforation sur le(s) services existant.
+     *
+     * @param bool $meta_name pour recuperer une valeur specifique, renvoi tout si false.
+     *
+     * @return string|array renvoi une meta_value specifique ou toutes
+     */
+    public function get_service_metas( $meta_name = false )
+    {
+        $meta_value = false;
+        if( $meta_name &&  array_key_exists( $meta_name, $this->_service_metas ) )
+        {
+            $meta_value = $this->_service_metas[$meta_name];
+        }
+
+        return ( $meta_value ) ? $meta_value : $this->_service_metas;
+    }
+
+    /**
      * Delegue au kernel la recuperation d'une valeur de configuration.
      *
      * @param string $config_name nom de l'option
@@ -61,21 +79,22 @@ abstract class Adaptability implements AdaptabilityInterface
     }
 
     /**
-     * Recolte l'inforation sur le(s) services existant.
+     * Gere les erreurs fatal ou non.
      *
-     * @param bool $meta_name pour recuperer une valeur specifique, renvoi tout si false.
+     * Sous traite a NoKernel
+     * @see NoKernel::error()
      *
-     * @return string|array renvoi une meta_value specifique ou toutes
+     * @param string $message le message
+     * @param int $code le code erreur
+     * @param array $context infos supp sur le context de l'erreur
+     * @param bool $fatal declenche ou non une exception
+     *
+     * @return bool true si l'ecriture dans le log est ok ( et erreur non fatal )
      */
-	public function get_service_metas( $meta_name = false )
-	{
-        $meta_value = false;
-        if( $meta_name &&  array_key_exists( $meta_name, $this->_service_metas ) )
-        {
-            $meta_value = $this->_service_metas[$meta_name];
-        }
-
-        return ( $meta_value ) ? $meta_value : $this->_service_metas;
+    public function error( $message, $code, $context = false, $fatal = false )
+    {
+        $service_name = $this->get_service_metas( 'service_name' );
+        return $this->_krl->error( $service_name, $message, $code, $context, $fatal );
     }
 
     // -
