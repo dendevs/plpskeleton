@@ -15,19 +15,13 @@ before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
   - mkdir -p build/logs
-  - mkdir -p build/docs
-  - chmod u+x .travis_shell_after_success.sh
-  - pear channel-discover pear.phpdoc.org 
-  - pear install phpdoc/phpDocumentor 
 
 script:
   - phpunit
   - phpunit --coverage-clover build/logs/clover.xml
-  - phpdoc run -d $TRAVIS_BUILD_DIR/src/ -t $TRAVIS_BUILD_DIR/build/docs
 
 after_script:
   - php vendor/bin/coveralls -v
-  - bash .travis_shell_after_success.sh
 
 env:
   global:
