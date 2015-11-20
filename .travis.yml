@@ -23,7 +23,7 @@ before_script:
 script:
   - phpunit
   - phpunit --coverage-clover build/logs/clover.xml
-  - phpdoc run -d ./src/ -t ./build/docs
+  - phpdoc run -d $TRAVIS_BUILD_DIR/src/ -t $TRAVIS_BUILD_DIR/build/docs
 
 after_script:
   - php vendor/bin/coveralls -v
