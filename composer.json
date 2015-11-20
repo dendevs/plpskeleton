@@ -5,6 +5,7 @@
     "require": {
     },
     "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
     },
     "authors": [
         {
